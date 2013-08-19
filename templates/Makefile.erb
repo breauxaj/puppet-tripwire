@@ -1,0 +1,24 @@
+all: tw.cfg tw.pol /var/lib/tripwire/tripwire.twd
+
+clean:
+	/bin/rm -f /etc/tripwire/local.key /etc/tripwire/tw.cfg /etc/tripwire/tw.pol /var/lib/tripwire/tripwire.twd
+
+init: clean /var/lib/tripwire/tripwire.twd
+
+local.key:
+	/usr/sbin/twadmin --generate-keys --local-keyfile local.key --local-passphrase '<%= localpassphrase %>'
+	
+site.key:
+	/usr/sbin/twadmin --generate-keys --site-keyfile site.key --site-passphrase '<%= sitepassphrase %>'
+
+tw.cfg: site.key twcfg.txt
+	/usr/sbin/twadmin --create-cfgfile --site-keyfile site.key --site-passphrase '<%= sitepassphrase %>' twcfg.txt
+
+tw.pol: tw.cfg twpol.txt
+	if [ -f tw.pol -a -f /var/lib/tripwire/tripwire.twd ]; \
+	then /usr/sbin/tripwire --update-policy --local-passphrase '<%= localpassphrase %>' --quiet --secure-mode low --site-passphrase '<%= sitepassphrase %>' twpol.txt; \
+	else /usr/sbin/twadmin --create-polfile --site-passphrase '<%= sitepassphrase %>' twpol.txt; \
+	fi
+
+/var/lib/tripwire/tripwire.twd: local.key site.key
+	/usr/sbin/tripwire --init --local-passphrase '<%= localpassphrase %>'

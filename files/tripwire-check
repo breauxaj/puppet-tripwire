@@ -1,0 +1,7 @@
+#!/bin/sh
+if [ ! -e /var/lib/tripwire/tripwire.twd ] ; then
+	echo "****    Error: Tripwire database not found.    ****"
+	echo "**** Run "/etc/tripwire/twinstall.sh" and/or "tripwire --init". ****"
+else
+        test -f /etc/tripwire/tw.cfg &&  /usr/sbin/tripwire --check
+fi
