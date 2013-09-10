@@ -9,7 +9,7 @@ SITEKEYFILE            =/etc/tripwire/site.key
 
 # e-mail notifications
 EMAILREPORTLEVEL       =3
-GLOBALEMAIL            =<%= globalemail %>
+GLOBALEMAIL            =<%= @globalemail %>
 MAILMETHOD             =SENDMAIL
 MAILNOVIOLATIONS       =false
 MAILPROGRAM            =/usr/sbin/sendmail -oi -t
