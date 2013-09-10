@@ -1,4 +1,4 @@
-Tripwire
+tripwire
 ========
 
 Tripwire is a free software security and data integrity tool useful for
