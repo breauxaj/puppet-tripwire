@@ -10,7 +10,7 @@ TWDB="/var/lib/tripwire";
 TWSKEY="/etc/tripwire";
 TWLKEY="/etc/tripwire";
 TWREPORT="/var/lib/tripwire/report";
-HOSTNAME=<%= @fqdn %>;
+HOSTNAME=<%= fqdn %>;
 
 @@section FS
 SEC_CRIT      = $(IgnoreNone)-SHa ;  # Critical files that cannot change
