@@ -1,4 +1,6 @@
-class tripwire {
+class tripwire (
+  $ensure = 'latest'
+){
   $required = $::operatingsystem ? {
     /(?i-mx:centos|fedora|redhat|scientific)/ => 'tripwire',
   }
@@ -10,7 +12,7 @@ class tripwire {
     ],
   }
 
-  package { $required: ensure => latest }
+  package { $required: ensure => $ensure }
 
   file { $paths:
     ensure => directory,

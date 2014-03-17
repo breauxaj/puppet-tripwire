@@ -18,3 +18,11 @@ tripwire::config { 'default':
   globalemail     => 'admin@domain.com'
 }
 ```
+
+License
+-------
+GPL3
+
+Contact
+-------
+breauxaj AT gmail DOT com
